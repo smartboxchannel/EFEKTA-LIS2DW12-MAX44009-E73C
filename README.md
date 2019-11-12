@@ -22,18 +22,19 @@ More info at http://efektalab.com/lima52 (still not working)
 
 ### Components (see also BOM.CSV):
 
-
-    1. a. nRF 52840 E73-2G4M08S1C (U1) - https://ali.ski/Bc8_x
-
-OR
-
-    1. b. nRF 52840 E73-2G4M08S1C (U1) - https://ali.ski/3p2PEK
+1. a. nRF 52840 E73-2G4M08S1C (U1) - https://ali.ski/Bc8_x
 
 OR
 
-    1. c. nRF 52840 E73-2G4M08S1C (U1) - https://ali.ski/c9UlL
-    
-    2. FC-135 3215 3.2*1.5 32.768KHZ Resonator (U2) - https://ali.ski/PKZVq8
+1. b. nRF 52840 E73-2G4M08S1C (U1) - https://ali.ski/3p2PEK
+
+OR
+
+1. c. nRF 52840 E73-2G4M08S1C (U1) - https://ali.ski/c9UlL
+
+2. FC-135 3215 3.2*1.5 32.768KHZ Resonator (U2) - https://ali.ski/PKZVq8
+
+
 
 
 
