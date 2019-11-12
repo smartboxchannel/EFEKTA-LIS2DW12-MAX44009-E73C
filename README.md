@@ -46,9 +46,21 @@ OR
 
 6. BROWN Battery Button Cell Holder Socket Case Black TBH-CR2032-15K (U7) - https://ali.ski/z2RbRj
 
-7. 2x3P | 6pin | 1.27mm | SMT | J1 Pin Header Female (U8) - http://ali.ski/tKqX1J
+7. 2x3P | 6pin | 1.27mm | SMT | Pin Header Female (U8) - http://ali.ski/tKqX1J
 
 8. 1210 Capacitor 100UF 10V (C7) - https://ali.ski/hRCu5
+
+9. 0603 SMD 1/8W chip resistor 5.6K (R1, R2) - https://ali.ski/8WIRx
+
+10. 0603 SMD 1/8W chip resistor 10K (R3, R5, R7) - https://ali.ski/8WIRx
+
+11. 0603 SMD 1/8W chip resistor 15K (R4) - https://ali.ski/8WIRx
+
+12. 0603 SMD 1/8W chip resistor 5K (R6) - https://ali.ski/8WIRx
+
+13. Capacitor 12PF 0603 (C1, C2) - https://ali.ski/KMz2x
+
+
 
 
 
