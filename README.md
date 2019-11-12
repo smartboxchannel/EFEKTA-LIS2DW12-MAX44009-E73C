@@ -3,5 +3,6 @@
 ### If this project was useful to you, you can buy me a Cup of coffee :)
 
 PayPal: altigraph@yandex.com
+Yandex Money: 4100140180242
 
 
