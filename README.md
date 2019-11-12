@@ -6,9 +6,13 @@ PayPal: altigraph@yandex.com
 
 Yandex Money: 4100140180242
 
-Also you can buy an assembled sensor - $
+Also you can buy an assembled sensor - $18.60
 
-or a set for self-Assembly of the sensor - $
+or a set for self-Assembly of the sensor - $12.90
+
+with case(sla) - +$3
+
+with case(fdm) - +$2
 
 Contact: altigraph@yandex.com
 
