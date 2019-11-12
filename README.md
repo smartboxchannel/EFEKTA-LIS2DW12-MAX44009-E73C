@@ -6,4 +6,8 @@ PayPal: altigraph@yandex.com
 
 Yandex Money: 4100140180242
 
+Also you can buy an assembled sensor - $
+
+or a set for self-Assembly of the sensor - $
+
 
