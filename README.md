@@ -20,6 +20,6 @@ More info at http://efektalab.com/lima52 (still not working)
 
 ---
 
-Components (see also BOM.CSV):
+### Components (see also BOM.CSV):
 
 
