@@ -42,6 +42,14 @@ OR
 
 4. MAX44009EDT (U3) - https://ali.ski/vQTH8c
 
+5. Micro Button Tact Switch SMD 4Pin 3X4X2.5MM White (U5, U6) - https://ali.ski/9t2Axp
+
+6. BROWN Battery Button Cell Holder Socket Case Black TBH-CR2032-15K (U7) - https://ali.ski/z2RbRj
+
+7. 2x3P | 6pin | 1.27mm | SMT | J1 Pin Header Female (U8) - http://ali.ski/tKqX1J
+
+8. 1210 Capacitor 100UF 10V (C7) - https://ali.ski/hRCu5
+
 
 
 
