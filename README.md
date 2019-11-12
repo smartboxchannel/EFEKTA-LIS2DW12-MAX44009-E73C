@@ -68,6 +68,13 @@ OR
 
 15. Capacitor 10UF 0603 (C4) - https://ali.ski/KMz2x
 
+---
+
+16. M1.4 4mm Round Head Micro Screws(2) - http://ali.ski/sV_W2
+
+17. M1.4 5mm Round Head Micro Screws(2) - http://ali.ski/sV_W2
+
+
 
 
 
