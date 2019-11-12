@@ -34,6 +34,12 @@ OR
 
 2. FC-135 3215 3.2*1.5 32.768KHZ Resonator (U2) - https://ali.ski/PKZVq8
 
+3. a. LIS2DW12 (U3) - https://ali.ski/z_OaK
+
+OR
+
+3. b. LIS2DH12 (U3) - https://ali.ski/dxZY1
+
 
 
 
