@@ -40,6 +40,8 @@ OR
 
 3. b. LIS2DH12 (U3) - https://ali.ski/dxZY1
 
+4. MAX44009EDT (U3) - https://ali.ski/vQTH8c
+
 
 
 
