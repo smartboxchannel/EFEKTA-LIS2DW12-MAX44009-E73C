@@ -10,4 +10,16 @@ Also you can buy an assembled sensor - $
 
 or a set for self-Assembly of the sensor - $
 
+Contact: altigraph@yandex.com
+
+Video: 
+
+More info at http://efektalab.com/lima52 (still not working)
+
+---
+
+---
+
+Components (see also BOM.CSV):
+
 
