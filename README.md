@@ -60,6 +60,10 @@ OR
 
 13. Capacitor 12PF 0603 (C1, C2) - https://ali.ski/KMz2x
 
+14. Capacitor 100NF 0603 (C3, C5, C6) - https://ali.ski/KMz2x
+
+15. Capacitor 10UF 0603 (C4) - https://ali.ski/KMz2x
+
 
 
 
