@@ -8,7 +8,7 @@ PayPal: altigraph@yandex.com
 
 Yandex Money: 4100140180242
 
-Also you can buy an assembled sensor - $18.60
+Also you can buy an assembled sensor - $18.60 - https://www.ebay.com/itm/202833599750
 
 or a set for self-Assembly of the sensor - $12.90
 
@@ -18,7 +18,7 @@ with case(fdm) - +$2
 
 Contact: altigraph@yandex.com
 
-Video: 
+Video: https://youtu.be/I2ywIxp-RsE
 
 More info at http://efektalab.com/lima52 (still not working)
 
