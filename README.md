@@ -10,7 +10,7 @@ Yandex Money: 4100140180242
 
 Also you can buy an assembled sensor - $18.60 - https://www.ebay.com/itm/202833599750
 
-or a set for self-Assembly of the sensor - $12.90
+or a set for self-Assembly(DIY Kit) of the sensor - $12.80
 
 with case(sla) - +$3
 
