@@ -10,11 +10,13 @@ Yandex Money: 4100140180242
 
 Also you can buy an assembled sensor - $18.60 - https://www.ebay.com/itm/202833599750
 
-or a set for self-Assembly(DIY Kit) of the sensor - $12.80
-
 with case(sla) - +$3
 
 with case(fdm) - +$2
+
+or a set for self-Assembly(5хDIY Kit, individual design) of the sensor - $75 - https://www.ebay.com/itm/202835413496
+
+or 10 Х PCB (individual design) - $11 https://www.ebay.com/itm/202835350723
 
 Contact: altigraph@yandex.com
 
