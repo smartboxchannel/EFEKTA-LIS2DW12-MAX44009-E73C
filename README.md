@@ -14,7 +14,7 @@ with case(sla) - +$3
 
 with case(fdm) - +$2
 
-or a set for self-Assembly(5хDIY Kit, individual design) of the sensor - $75 - https://www.ebay.com/itm/202835413496
+or a set for self-Assembly(5хDIY Kit, individual design) of the sensor - $65 - https://www.ebay.com/itm/202835413496
 
 or 10 Х PCB (individual design) - $11 https://www.ebay.com/itm/202835350723
 
