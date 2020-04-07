@@ -13,8 +13,8 @@ int16_t mtwr;
 #define MY_TRANSPORT_WAIT_READY_MS (mtwr)
 #define MY_NRF5_ESB_PA_LEVEL (NRF5_PA_MAX)
 #include <MySensors.h>
-#define SN "LUX & VIBRO SENS"
-#define SV "1.0"
+#define SN "LUX & SHOCK SENS"
+#define SV "2.1"
 #define V_SENS_CHILD_ID 1
 #define LUX_SENS_CHILD_ID 2
 #define WPM_SENS_CHILD_ID 3
@@ -22,7 +22,7 @@ int16_t mtwr;
 #define LEVEL_SENSIV_V_SENS_CHILD_ID 230
 #define ENABLE_WPM_SENS_CHILD_ID 240
 #define SIGNAL_Q_ID 253
-#define TEMP_CHILD_ID 254 //for any tests
+
 #include <MySensors.h>
 MyMessage vibroMsg(V_SENS_CHILD_ID, V_TRIPPED);
 MyMessage brightMsg(LUX_SENS_CHILD_ID, V_LEVEL);
@@ -30,7 +30,8 @@ MyMessage wpmMsg(WPM_SENS_CHILD_ID, V_LEVEL);
 MyMessage conf_wpmMsg(ENABLE_WPM_SENS_CHILD_ID, V_VAR1);
 MyMessage conf_vsensMsg(LEVEL_SENSIV_V_SENS_CHILD_ID, V_VAR1);
 MyMessage conf_interv_rluxMsg(INTERVAL_R_LUX_CHILD_ID, V_VAR1);
-MyMessage tempMsg(TEMP_CHILD_ID, V_VAR1); //for any tests
+
+bool sendOk;
 bool nosleep = 0;
 bool button_flag = 0;
 bool configMode = 0;
@@ -120,164 +121,169 @@ void setup() {
 
 void presentation()
 {
-  if (!sendSketchInfo(SN, SV)) {
+  sendOk = sendSketchInfo(SN, SV);
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1000);
-    wait(50);
-    if (!sendSketchInfo(SN, SV)) {
+    wait(20);
+    sendOk = sendSketchInfo(SN, SV);
+    wait(20);
+    if (sendOk == false) {
+      wait(40);
       _transportSM.failedUplinkTransmissions = 0;
+      sendOk = sendSketchInfo(SN, SV);
+      wait(40);
     }
   }
 
-  present(V_SENS_CHILD_ID, S_VIBRATION, "STATUS VIBRO", 1);
-  wait(2500, C_PRESENTATION, S_VIBRATION);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-  if (PRESENT_ACK == 0) {
+  sendOk = present(V_SENS_CHILD_ID, S_VIBRATION, "STATUS VIBRO");
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    present(V_SENS_CHILD_ID, S_VIBRATION, "STATUS VIBRO", 1);
-    wait(2500, C_PRESENTATION, S_VIBRATION);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    PRESENT_ACK = 0;
+    wait(30);
+    sendOk = present(V_SENS_CHILD_ID, S_VIBRATION, "STATUS VIBRO");
+    wait(30);
+    if (sendOk == false) {
+      wait(60);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = present(V_SENS_CHILD_ID, S_VIBRATION, "STATUS VIBRO");
+      wait(60);
+    }
   }
 
-  present(LUX_SENS_CHILD_ID, S_LIGHT_LEVEL, "LUX", 1);
-  wait(2500, C_PRESENTATION, S_LIGHT_LEVEL);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-  if (PRESENT_ACK == 0) {
+
+  sendOk = present(LUX_SENS_CHILD_ID, S_LIGHT_LEVEL, "LUX");
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    present(LUX_SENS_CHILD_ID, S_LIGHT_LEVEL, "LUX", 1);
-    wait(2500, C_PRESENTATION, S_LIGHT_LEVEL);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    PRESENT_ACK = 0;
+    wait(40);
+    sendOk = present(LUX_SENS_CHILD_ID, S_LIGHT_LEVEL, "LUX");
+    wait(40);
+    if (sendOk == false) {
+      wait(80);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = present(LUX_SENS_CHILD_ID, S_LIGHT_LEVEL, "LUX");
+      wait(80);
+    }
   }
 
-  present(WPM_SENS_CHILD_ID, S_LIGHT_LEVEL, "W/M^2", 1);
-  wait(2500, C_PRESENTATION, S_LIGHT_LEVEL);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-  if (PRESENT_ACK == 0) {
+
+  sendOk = present(WPM_SENS_CHILD_ID, S_LIGHT_LEVEL, "W/M^2");
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
     wait(50);
-    present(WPM_SENS_CHILD_ID, S_LIGHT_LEVEL, "W/M^2", 1);
-    wait(2500, C_PRESENTATION, S_LIGHT_LEVEL);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    PRESENT_ACK = 0;
+    sendOk = present(WPM_SENS_CHILD_ID, S_LIGHT_LEVEL, "W/M^2");
+    wait(50);
+    if (sendOk == false) {
+      wait(100);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = present(WPM_SENS_CHILD_ID, S_LIGHT_LEVEL, "W/M^2");
+      wait(100);
+    }
   }
 
-  present(SIGNAL_Q_ID, S_CUSTOM, "SIGNAL QUALITY", 1);
-  wait(2500, C_PRESENTATION, S_CUSTOM);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-  if (PRESENT_ACK == 0) {
+
+  sendOk = present(SIGNAL_Q_ID, S_CUSTOM, "SIGNAL QUALITY");
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    present(SIGNAL_Q_ID, S_CUSTOM, "SIGNAL QUALITY", 1);
-    wait(2500, C_PRESENTATION, S_CUSTOM);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    PRESENT_ACK = 0;
+    wait(60);
+    sendOk = present(SIGNAL_Q_ID, S_CUSTOM, "SIGNAL QUALITY");
+    wait(60);
+    if (sendOk == false) {
+      wait(120);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = present(SIGNAL_Q_ID, S_CUSTOM, "SIGNAL QUALITY");
+      wait(120);
+    }
   }
 
-  present(ENABLE_WPM_SENS_CHILD_ID, S_CUSTOM, "ON|OFF WPM", 1);
-  wait(2500, C_PRESENTATION, S_CUSTOM);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-  if (PRESENT_ACK == 0) {
+
+  sendOk = present(ENABLE_WPM_SENS_CHILD_ID, S_CUSTOM, "ON|OFF WPM");
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    present(ENABLE_WPM_SENS_CHILD_ID, S_CUSTOM, "ON|OFF WPM", 1);
-    wait(2500, C_PRESENTATION, S_CUSTOM);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    PRESENT_ACK = 0;
+    wait(60);
+    sendOk = present(ENABLE_WPM_SENS_CHILD_ID, S_CUSTOM, "ON|OFF WPM");
+    wait(60);
+    if (sendOk == false) {
+      wait(120);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = present(ENABLE_WPM_SENS_CHILD_ID, S_CUSTOM, "ON|OFF WPM");
+      wait(120);
+    }
   }
 
-  present(LEVEL_SENSIV_V_SENS_CHILD_ID, S_CUSTOM, "SENS LEVEL VIBRO", 1);
-  wait(2500, C_PRESENTATION, S_CUSTOM);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-  if (PRESENT_ACK == 0) {
+
+  sendOk = present(LEVEL_SENSIV_V_SENS_CHILD_ID, S_CUSTOM, "SENS LEVEL VIBRO");
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    present(LEVEL_SENSIV_V_SENS_CHILD_ID, S_CUSTOM, "SENS LEVEL VIBRO", 1);
-    wait(2500, C_PRESENTATION, S_CUSTOM);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    PRESENT_ACK = 0;
+    wait(70);
+    sendOk = present(LEVEL_SENSIV_V_SENS_CHILD_ID, S_CUSTOM, "SENS LEVEL VIBRO");
+    wait(70);
+    if (sendOk == false) {
+      wait(140);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = present(LEVEL_SENSIV_V_SENS_CHILD_ID, S_CUSTOM, "SENS LEVEL VIBRO");
+      wait(140);
+    }
   }
 
-  present(INTERVAL_R_LUX_CHILD_ID, S_CUSTOM, "INTERVAL RLUX|MIN", 1);
-  wait(2500, C_PRESENTATION, S_CUSTOM);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-  if (PRESENT_ACK == 0) {
+
+  sendOk = present(INTERVAL_R_LUX_CHILD_ID, S_CUSTOM, "INTERVAL RLUX|MIN");
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    present(INTERVAL_R_LUX_CHILD_ID, S_CUSTOM, "INTERVAL RLUX|MIN", 1);
-    wait(2500, C_PRESENTATION, S_CUSTOM);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER PRESENT SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    PRESENT_ACK = 0;
+    wait(80);
+    sendOk = present(INTERVAL_R_LUX_CHILD_ID, S_CUSTOM, "INTERVAL RLUX|MIN");
+    wait(80);
+    if (sendOk == false) {
+      wait(160);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = present(INTERVAL_R_LUX_CHILD_ID, S_CUSTOM, "INTERVAL RLUX|MIN");
+      wait(160);
+    }
   }
 
-  send(conf_wpmMsg.set(wpm_enable), 1);
-  wait(2500, C_SET, V_VAR1);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER SEND CONF SENSOR\n"));
-  if (Ack_TL == 0) {
+
+  sendOk = send(conf_wpmMsg.set(wpm_enable));
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    send(conf_wpmMsg.set(wpm_enable), 1);
-    wait(2500, C_SET, V_VAR1);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER SEND CONF SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    Ack_TL = 0;
+    wait(90);
+    sendOk = send(conf_wpmMsg.set(wpm_enable));
+    wait(90);
+    if (sendOk == false) {
+      wait(180);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = send(conf_wpmMsg.set(wpm_enable));
+      wait(180);
+    }
   }
 
-  send(conf_vsensMsg.set(conf_vibro_set), 1);
-  wait(2500, C_SET, V_VAR1);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER SEND CONF SENSOR\n"));
-  if (Ack_TL == 0) {
+
+  sendOk = send(conf_vsensMsg.set(conf_vibro_set));
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    send(conf_vsensMsg.set(conf_vibro_set), 1);
-    wait(2500, C_SET, V_VAR1);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER SEND CONF SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    Ack_TL = 0;
+    wait(100);
+    sendOk = send(conf_vsensMsg.set(conf_vibro_set));
+    wait(100);
+    if (sendOk == false) {
+      wait(200);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = send(conf_vsensMsg.set(conf_vibro_set));
+      wait(200);
+    }
   }
 
-  send(conf_interv_rluxMsg.set(interval_reading_lux), 1);
-  wait(2500, C_SET, V_VAR1);
-  CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER SEND CONF SENSOR\n"));
-  if (Ack_TL == 0) {
+
+  sendOk = send(conf_interv_rluxMsg.set(interval_reading_lux));
+  if (sendOk == false) {
     _transportSM.failedUplinkTransmissions = 0;
-    sleep(1500);
-    wait(50);
-    send(conf_interv_rluxMsg.set(interval_reading_lux), 1);
-    wait(2500, C_SET, V_VAR1);
-    CORE_DEBUG(PSTR("MyS: TEST WAIT AFTER SEND CONF SENSOR\n"));
-    _transportSM.failedUplinkTransmissions = 0;
-  } else {
-    Ack_TL = 0;
+    wait(110);
+    sendOk = send(conf_interv_rluxMsg.set(interval_reading_lux));
+    wait(110);
+    if (sendOk == false) {
+      wait(220);
+      _transportSM.failedUplinkTransmissions = 0;
+      sendOk = send(conf_interv_rluxMsg.set(interval_reading_lux));
+      wait(220);
+    }
   }
+
 }
 
 
@@ -298,12 +304,10 @@ void loop()
       }
       if (configMode == 0) {
         if ((axelInt1Status == AXEL_INT1) || (buttInt1Status == PIN_BUTTON1)) {
-          nosleep = 1;
           if (axelInt1Status == AXEL_INT1) {
             nosleep = 1;
             send_Axel();
             axelInt1Status = 0;
-            nosleep = 0;
             newmillis = millis();
             interrupt_time = newmillis - oldmillis;
             SLEEP_TIME_W = SLEEP_TIME_W - interrupt_time;
@@ -316,6 +320,7 @@ void loop()
                 countbatt = 0;
               }
             }
+            nosleep = 0;
           }
           if (buttInt1Status == PIN_BUTTON1) {
             if (digitalRead(PIN_BUTTON1) == 0 && button_flag == 0) {
@@ -418,7 +423,7 @@ void loop()
           nosleep = 0;
         }
       } else {
-        if (millis() - configMillis > 20000) {
+        if (millis() - configMillis > 30000) {
           blinky(3, 3, GREEN_LED);
           configMode = 0;
           nosleep = 0;
@@ -478,20 +483,20 @@ void loop()
           }
           if ((millis() - previousMillis > 500) && (millis() - previousMillis <= 2500))
           {
-           ledsOff();
+            ledsOff();
             blinky(1, 1, BLUE_LED);
             check_parent();
             button_flag = 0;
             nosleep = 0;
-            buttInt1Status = 0; 
+            buttInt1Status = 0;
           }
 
           if ((millis() - previousMillis > 2500) && (millis() - previousMillis <= 2750))
           {
-           ledsOff();
+            ledsOff();
             button_flag = 0;
             nosleep = 0;
-            buttInt1Status = 0; 
+            buttInt1Status = 0;
           }
 
           if ((millis() - previousMillis > 2750) && (millis() - previousMillis <= 4750))
@@ -533,7 +538,9 @@ void loop()
       oldmillis = millis();
       axelInt1Status = 0;
       buttInt1Status = 0;
+      wait(100);
       sleep(SLEEP_TIME_W, false);
+      wait(50);
       nosleep = 1;
     }
   }
@@ -637,9 +644,9 @@ void vibro_Init() {
     lis2->ODRTEMP = ODR_200Hz;
   }
   lis2->Enable_X();
-  wait(10);
+  wait(50);
   lis2->Enable_Wake_Up_Detection();
-  wait(10);
+  wait(50);
 }
 
 
@@ -662,59 +669,42 @@ void send_Axel() {
     blinky(6, 1, RED_LED);
     lis2->Disable_Wake_Up_Detection();
     wait(100);
-    if (_transportConfig.parentNodeId == 0) {
-      if (send(vibroMsg.set(vibro))) {
-        wait(100);
-        err_delivery_beat = 0;
-        if (flag_nogateway_mode == 1) {
-          flag_nogateway_mode = 0;
-          CORE_DEBUG(PSTR("MyS: NORMAL GATEWAY MODE\n"));
-          err_delivery_beat = 0;
-        }
-      } else {
+    sendOk = send(vibroMsg.set(vibro));
+    if (sendOk == false) {
+      _transportSM.failedUplinkTransmissions = 0;
+      wait(30);
+      sendOk = send(vibroMsg.set(vibro));
+      wait(30);
+      if (sendOk == false) {
+        wait(60);
         _transportSM.failedUplinkTransmissions = 0;
-        if (err_delivery_beat < 5) {
-          err_delivery_beat++;
-        }
-        if (err_delivery_beat == 4) {
-          if (flag_nogateway_mode == 0) {
-            gateway_fail();
-            CORE_DEBUG(PSTR("MyS: LOST GATEWAY MODE\n"));
-          }
+        sendOk = send(vibroMsg.set(vibro));
+        wait(60);
+      }
+    }
+    if (sendOk == true) {
+      err_delivery_beat = 0;
+      if (flag_nogateway_mode == 1) {
+        flag_nogateway_mode = 0;
+        CORE_DEBUG(PSTR("MyS: NORMAL GATEWAY MODE\n"));
+        err_delivery_beat = 0;
+      }
+    } else {
+      _transportSM.failedUplinkTransmissions = 0;
+      if (err_delivery_beat < 5) {
+        err_delivery_beat++;
+      }
+      if (err_delivery_beat == 4) {
+        if (flag_nogateway_mode == 0) {
+          gateway_fail();
+          CORE_DEBUG(PSTR("MyS: LOST GATEWAY MODE\n"));
         }
       }
-      lis2->Enable_Wake_Up_Detection();
-      axel_time = millis();
-      nosleep = 0;
     }
-    if (_transportConfig.parentNodeId > 0) {
-      send(vibroMsg.set(vibro), 1);
-      wait(2500, C_SET, V_TRIPPED);
-      if (Ack_TL == 1) {
-        Ack_TL = 0;
-        err_delivery_beat = 0;
-        //sleep_flag = 0;
-        if (flag_nogateway_mode == 1) {
-          flag_nogateway_mode = 0;
-          CORE_DEBUG(PSTR("MyS: NORMAL GATEWAY MODE\n"));
-          err_delivery_beat = 0;
-        }
-      } else {
-        _transportSM.failedUplinkTransmissions = 0;
-        if (err_delivery_beat < 5) {
-          err_delivery_beat++;
-        }
-        if (err_delivery_beat == 4) {
-          if (flag_nogateway_mode == 0) {
-            gateway_fail();
-            CORE_DEBUG(PSTR("MyS: LOST GATEWAY MODE\n"));
-          }
-        }
-      }
-      lis2->Enable_Wake_Up_Detection();
-      axel_time = millis();
-      nosleep = 0;
-    }
+    lis2->Enable_Wake_Up_Detection();
+    wait(100);
+    axel_time = millis();
+    nosleep = 0;
   } else {
     nosleep = 0;
   }
@@ -724,80 +714,81 @@ void send_Axel() {
 
 void send_Brigh(bool start) {
   brightness = light.get_lux() * 2;
-  wait(10);
+  wait(50);
   if (start == 1) {
     if (abs(brightness - lastbrightness) >= brightThreshold) {
-      if (_transportConfig.parentNodeId == 0) {
-        if (send(brightMsg.set(brightness, 0))) {
-          err_delivery_beat = 0;
-          if (flag_nogateway_mode == 1) {
-            flag_nogateway_mode = 0;
-            CORE_DEBUG(PSTR("MyS: NORMAL GATEWAY MODE\n"));
-            err_delivery_beat = 0;
-          }
-          lastbrightness = brightness;
-          if (wpm_enable == 1) {
-            Wpm = GetWpm();
-            wait(100);
-            send(wpmMsg.set(Wpm, 0));
-          }
-          wait(50);
-          blinky(2, 2, BLUE_LED);
-        } else {
+      sendOk = send(brightMsg.set(brightness, 0));
+      if (sendOk == false) {
+        _transportSM.failedUplinkTransmissions = 0;
+        wait(30);
+        sendOk = send(brightMsg.set(brightness, 0));
+        wait(30);
+        if (sendOk == false) {
+          wait(60);
           _transportSM.failedUplinkTransmissions = 0;
-          if (err_delivery_beat < 5) {
-            err_delivery_beat++;
-          }
-          if (err_delivery_beat == 4) {
-            if (flag_nogateway_mode == 0) {
-              gateway_fail();
-              CORE_DEBUG(PSTR("MyS: LOST GATEWAY MODE\n"));
-            }
-          }
+          sendOk = send(brightMsg.set(brightness, 0));
+          wait(60);
         }
       }
-      if (_transportConfig.parentNodeId > 0) {
-        send(brightMsg.set(brightness, 0), 1);
-        wait(2500, C_SET, V_LEVEL);
-        if (Ack_TL == 1) {
-          Ack_TL = 0;
+      if (sendOk == true) {
+        err_delivery_beat = 0;
+        if (flag_nogateway_mode == 1) {
+          flag_nogateway_mode = 0;
+          CORE_DEBUG(PSTR("MyS: NORMAL GATEWAY MODE\n"));
           err_delivery_beat = 0;
-          if (flag_nogateway_mode == 1) {
-            flag_nogateway_mode = 0;
-            CORE_DEBUG(PSTR("MyS: NORMAL GATEWAY MODE\n"));
-            err_delivery_beat = 0;
-          }
-          lastbrightness = brightness;
-          if (wpm_enable == 1) {
-            Wpm = GetWpm();
-            wait(100);
-            send(wpmMsg.set(Wpm, 0));
-          }
-          wait(50);
-          blinky(2, 2, BLUE_LED);
-        } else {
-          _transportSM.failedUplinkTransmissions = 0;
-          if (err_delivery_beat < 5) {
-            err_delivery_beat++;
-          }
-          if (err_delivery_beat == 4) {
-            if (flag_nogateway_mode == 0) {
-              gateway_fail();
-              CORE_DEBUG(PSTR("MyS: LOST GATEWAY MODE\n"));
-            }
+        }
+        lastbrightness = brightness;
+        if (wpm_enable == 1) {
+          Wpm = GetWpm();
+          wait(100);
+          send(wpmMsg.set(Wpm, 0));
+        }
+        wait(50);
+        blinky(2, 2, BLUE_LED);
+      } else {
+        _transportSM.failedUplinkTransmissions = 0;
+        if (err_delivery_beat < 5) {
+          err_delivery_beat++;
+        }
+        if (err_delivery_beat == 4) {
+          if (flag_nogateway_mode == 0) {
+            gateway_fail();
+            CORE_DEBUG(PSTR("MyS: LOST GATEWAY MODE\n"));
           }
         }
       }
     }
   } else {
-    send(brightMsg.set(brightness, 0));
+    sendOk = send(brightMsg.set(brightness, 0));
+    if (sendOk == false) {
+      _transportSM.failedUplinkTransmissions = 0;
+      wait(30);
+      sendOk = send(brightMsg.set(brightness, 0));
+      wait(30);
+      if (sendOk == false) {
+        wait(60);
+        _transportSM.failedUplinkTransmissions = 0;
+        sendOk = send(brightMsg.set(brightness, 0));
+        wait(60);
+      }
+    }
     lastbrightness = brightness;
     if (wpm_enable == 1) {
       Wpm = GetWpm();
-      wait(100);
-      send(wpmMsg.set(Wpm, 0));
+      sendOk = send(wpmMsg.set(Wpm, 0));
+      if (sendOk == false) {
+        _transportSM.failedUplinkTransmissions = 0;
+        wait(30);
+        sendOk = send(wpmMsg.set(Wpm, 0));
+        wait(30);
+        if (sendOk == false) {
+          wait(60);
+          _transportSM.failedUplinkTransmissions = 0;
+          sendOk = send(wpmMsg.set(Wpm, 0));
+          wait(60);
+        }
+      }
     }
-    wait(50);
     blinky(2, 2, BLUE_LED);
   }
 }
@@ -887,20 +878,53 @@ void sendBatteryStatus(bool start) {
   batt_cap = battery_level_in_percent(batteryVoltage);
   if (start == 1) {
     if (batt_cap < old_batt_cap) {
-      sendBatteryLevel(battery_level_in_percent(batteryVoltage), 1);
-      wait(2500, C_INTERNAL, I_BATTERY_LEVEL);
+      sendOk = sendBatteryLevel(battery_level_in_percent(batteryVoltage), 1);
+      if (sendOk == false) {
+        _transportSM.failedUplinkTransmissions = 0;
+        wait(30);
+        sendOk = sendBatteryLevel(battery_level_in_percent(batteryVoltage), 1);
+        wait(30);
+        if (sendOk == false) {
+          wait(60);
+          _transportSM.failedUplinkTransmissions = 0;
+          sendOk = sendBatteryLevel(battery_level_in_percent(batteryVoltage), 1);
+          wait(60);
+        }
+      }
       old_batt_cap = batt_cap;
     }
   } else {
-    sendBatteryLevel(battery_level_in_percent(batteryVoltage), 1);
-    wait(2500, C_INTERNAL, I_BATTERY_LEVEL);
+    sendOk = sendBatteryLevel(battery_level_in_percent(batteryVoltage), 1);
+    if (sendOk == false) {
+      _transportSM.failedUplinkTransmissions = 0;
+      wait(30);
+      sendOk = sendBatteryLevel(battery_level_in_percent(batteryVoltage), 1);
+      wait(30);
+      if (sendOk == false) {
+        wait(60);
+        _transportSM.failedUplinkTransmissions = 0;
+        sendOk = sendBatteryLevel(battery_level_in_percent(batteryVoltage), 1);
+        wait(60);
+      }
+    }
   }
 
   linkQuality = calculationRxQuality();
   if (linkQuality != old_linkQuality) {
     wait(10);
-    sendSignalStrength(linkQuality);
-    wait(50);
+    sendOk = sendSignalStrength(linkQuality);
+    if (sendOk == false) {
+      _transportSM.failedUplinkTransmissions = 0;
+      wait(30);
+      sendOk = sendSignalStrength(linkQuality);
+      wait(30);
+      if (sendOk == false) {
+        wait(60);
+        _transportSM.failedUplinkTransmissions = 0;
+        sendOk = sendSignalStrength(linkQuality);
+        wait(60);
+      }
+    }
     old_linkQuality = linkQuality;
   }
 }
@@ -1204,7 +1228,3 @@ void receive(const MyMessage & message)
     CORE_DEBUG(PSTR("MyS: !!!ACK OF THE PRESENTATION IN THE FUNCTION RECEIVE RECEIVED!!!\n"));
   }
 }
-
-
-
-//send(tempMsg.set(C_BATT_TIME));  //for any tests
