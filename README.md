@@ -2,11 +2,15 @@
 
 Light sensor(LUX) and vibration.
 
-#### If this project was useful to you, you can buy me a Cup of coffee :)
+#### Donate me, ..I will make more and faster open devices :)
 
-PayPal: altigraph@yandex.com
+PayPal: altigraph@ya.ru
 
 Yandex Money: 4100140180242
+
+WebMoney: Z722291985192, X133903637383, R494367503336
+
+Bitcoin: bc1q3prwstl54j3a5j58esepfkyrqfjn0ydr8p3vc7
 
 Also you can buy an assembled sensor - $18.60 - https://www.ebay.com/itm/202833599750
 
