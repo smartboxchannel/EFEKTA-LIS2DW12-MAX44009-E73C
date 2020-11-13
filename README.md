@@ -4,23 +4,15 @@ Light sensor(LUX) and vibration.
 
 #### Donate me, ..I will make more and faster open devices :)
 
+VISA: 4048415000506242
+
 PayPal: altigraph@ya.ru
 
 Yandex Money: 4100140180242
 
 WebMoney: Z722291985192, X133903637383, R494367503336
 
-Bitcoin: bc1q3prwstl54j3a5j58esepfkyrqfjn0ydr8p3vc7
-
-Also you can buy an assembled sensor - $18.60 - https://www.ebay.com/itm/202833599750
-
-with case(sla) - +$3
-
-with case(fdm) - +$2
-
-or a set for self-Assembly(5хDIY Kit, individual design) of the sensor - $65 - https://www.ebay.com/itm/202835413496
-
-or 10 Х PCB (individual design) - $11 https://www.ebay.com/itm/202835350723
+Bitcoin: bc1q4ejf52gfk0p6z8qahq3f7qz9jpm3lmjq9c7rcr
 
 Contact: altigraph@yandex.com
 
